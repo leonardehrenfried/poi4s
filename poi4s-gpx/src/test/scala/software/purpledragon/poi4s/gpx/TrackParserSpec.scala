@@ -3,6 +3,7 @@ package software.purpledragon.poi4s.gpx
 import java.time.OffsetDateTime
 
 import org.scalatest.{FlatSpec, Matchers}
+import software.purpledragon.poi4s.model.TrackPoint
 import software.purpledragon.xml.scalatest.XmlMatchers
 
 class TrackParserSpec extends FlatSpec with Matchers with XmlMatchers {
@@ -19,7 +20,9 @@ class TrackParserSpec extends FlatSpec with Matchers with XmlMatchers {
     track.time should be(OffsetDateTime.parse("2018-01-20T13:45:13Z").toInstant)
 
     track.segments should have size 4
-    track.segments(0).points should have size 239
+    track.segments.head.points should have size 239
+    track.segments.head.points.head should be(
+      TrackPoint(52.502843, 13.415284, Some(42.8), OffsetDateTime.parse("2018-01-20T13:45:13Z").toInstant))
   }
 
 }
