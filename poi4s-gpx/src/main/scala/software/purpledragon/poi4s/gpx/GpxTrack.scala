@@ -16,9 +16,7 @@
 
 package software.purpledragon.poi4s.gpx
 
-import java.time.OffsetDateTime
-
-import software.purpledragon.poi4s.model.{Track, Waypoint}
+import software.purpledragon.poi4s.model.{Track, TrackPoint, TrackSegment}
 import software.purpledragon.poi4s.util.XmlUtils._
 
 import scala.xml.Node
@@ -29,7 +27,20 @@ private[gpx] object GpxTrack {
     Track(
       (node \\ "name").text,
       (node \\ "time").instantOption.get,
-      Nil
+      (node \\ "trkseg").map(parseSegment)
     )
   }
+
+  private def parseSegment(node: Node): TrackSegment =
+    TrackSegment(
+      (node \\ "trkpt").map(parsePoint),
+    )
+
+  private def parsePoint(node: Node): TrackPoint =
+    TrackPoint(
+      (node \@ "lat").toDouble,
+      (node \@ "lon").toDouble,
+      (node \ "ele").doubleOption,
+      (node \ "time").instantOption.get,
+    )
 }

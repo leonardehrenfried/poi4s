@@ -18,7 +18,8 @@ class TrackParserSpec extends FlatSpec with Matchers with XmlMatchers {
     track.name should be("Running 1/20/18 2:45 pm")
     track.time should be(OffsetDateTime.parse("2018-01-20T13:45:13Z").toInstant)
 
-    //track.segments should have size 2
+    track.segments should have size 4
+    track.segments(0).points should have size 239
   }
 
 }
