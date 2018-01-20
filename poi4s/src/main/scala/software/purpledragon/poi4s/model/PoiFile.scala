@@ -37,7 +37,8 @@ case class PoiFile(
     creator: Option[String] = None,
     version: Option[FileVersion] = None,
     createdAt: Option[Instant] = None,
-    waypoints: Seq[Waypoint] = Nil) {
+    waypoints: Seq[Waypoint] = Nil,
+    track: Option[Track] = None) {
 
   // TODO include meta about origin file
 
