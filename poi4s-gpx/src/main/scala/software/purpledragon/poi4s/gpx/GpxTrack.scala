@@ -33,7 +33,7 @@ private[gpx] object GpxTrack {
 
   private def parseSegment(node: Node): TrackSegment =
     TrackSegment(
-      (node \\ "trkpt").map(parsePoint),
+      (node \\ "trkpt").map(parsePoint)
     )
 
   private def parsePoint(node: Node): TrackPoint =
@@ -41,6 +41,6 @@ private[gpx] object GpxTrack {
       (node \@ "lat").toDouble,
       (node \@ "lon").toDouble,
       (node \ "ele").doubleOption,
-      (node \ "time").instantOption.get,
+      (node \ "time").instantOption.get
     )
 }
